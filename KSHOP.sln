@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36616.10 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSHOP.PL", "KSHOP.PL\KSHOP.PL.csproj", "{3CAD51FB-9F33-4D30-B88E-48D84DAFFE2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSHOP.BLL", "KSHOP.BLL\KSHOP.BLL.csproj", "{67C12988-0703-4891-B654-949557D752C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSHOP.DAL", "KSHOP.DAL\KSHOP.DAL.csproj", "{B3EC737D-C5A4-4BEF-8EF4-889518BEAEA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CAD51FB-9F33-4D30-B88E-48D84DAFFE2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CAD51FB-9F33-4D30-B88E-48D84DAFFE2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CAD51FB-9F33-4D30-B88E-48D84DAFFE2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CAD51FB-9F33-4D30-B88E-48D84DAFFE2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67C12988-0703-4891-B654-949557D752C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C12988-0703-4891-B654-949557D752C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C12988-0703-4891-B654-949557D752C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C12988-0703-4891-B654-949557D752C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3EC737D-C5A4-4BEF-8EF4-889518BEAEA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3EC737D-C5A4-4BEF-8EF4-889518BEAEA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3EC737D-C5A4-4BEF-8EF4-889518BEAEA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3EC737D-C5A4-4BEF-8EF4-889518BEAEA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E080872-8A3A-41FE-8B4F-7384A89F3DB0}
+	EndGlobalSection
+EndGlobal

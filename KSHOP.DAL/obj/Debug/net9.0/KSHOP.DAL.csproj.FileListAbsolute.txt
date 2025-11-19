@@ -1,0 +1,14 @@
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\bin\Debug\net9.0\KSHOP.DAL.deps.json
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\bin\Debug\net9.0\KSHOP.DAL.runtimeconfig.json
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\bin\Debug\net9.0\KSHOP.DAL.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\bin\Debug\net9.0\KSHOP.DAL.pdb
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.csproj.AssemblyReference.cache
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.AssemblyInfoInputs.cache
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.AssemblyInfo.cs
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.csproj.CoreCompileInputs.cache
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\refint\KSHOP.DAL.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.pdb
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.genruntimeconfig.cache
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\ref\KSHOP.DAL.dll
