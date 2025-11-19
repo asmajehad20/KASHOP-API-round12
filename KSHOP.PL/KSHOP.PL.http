@@ -1,0 +1,6 @@
+@KSHOP.PL_HostAddress = http://localhost:5294
+
+GET {{KSHOP.PL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
