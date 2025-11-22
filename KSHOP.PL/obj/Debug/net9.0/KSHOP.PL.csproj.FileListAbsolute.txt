@@ -165,3 +165,14 @@ C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\ru\Microsof
 C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\ar\KSHOP.PL.resources.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\obj\Debug\net9.0\KSHOP.PL.Resources.SharedResource.resources
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\obj\Debug\net9.0\KSHOP.PL.Resources.SharedResource.ar.resources
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\obj\Debug\net9.0\KSHOP.PL.csproj.GenerateResource.cache
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\obj\Debug\net9.0\KSHOP.PL.sourcelink.json
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\obj\Debug\net9.0\ar\KSHOP.PL.resources.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\Mapster.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\Mapster.Core.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll

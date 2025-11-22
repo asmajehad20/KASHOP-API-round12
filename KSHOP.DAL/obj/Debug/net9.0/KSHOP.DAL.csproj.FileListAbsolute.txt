@@ -12,3 +12,4 @@ C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\refint\KSH
 C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.pdb
 C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.genruntimeconfig.cache
 C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\ref\KSHOP.DAL.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.DAL\obj\Debug\net9.0\KSHOP.DAL.sourcelink.json

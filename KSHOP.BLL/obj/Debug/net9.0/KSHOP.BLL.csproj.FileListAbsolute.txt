@@ -13,3 +13,4 @@ C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.BLL\obj\Debug\net9.0\KSHOP.BLL.
 C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.BLL\obj\Debug\net9.0\refint\KSHOP.BLL.dll
 C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.BLL\obj\Debug\net9.0\KSHOP.BLL.pdb
 C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.BLL\obj\Debug\net9.0\ref\KSHOP.BLL.dll
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.BLL\obj\Debug\net9.0\KSHOP.BLL.sourcelink.json
