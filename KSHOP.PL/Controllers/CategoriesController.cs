@@ -29,7 +29,7 @@ namespace KSHOP.PL.Controllers
         [HttpGet("")]
         public IActionResult Index() 
         {
-            _categoryService.GetAllCategories();
+            var response =  _categoryService.GetAllCategories();
             return Ok(new {message = _localizer["Success"].Value , response });
         }
 

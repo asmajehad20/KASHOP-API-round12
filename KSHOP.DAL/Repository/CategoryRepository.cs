@@ -1,5 +1,6 @@
 ﻿using KSHOP.DAL.Data;
 using KSHOP.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace KSHOP.DAL.Repository
     public class CategoryRepository: ICategoryRepository
     {
         private readonly ApplicationDbContext _context;
+        //private readonly UserManager<TUser> _userManager;
         public CategoryRepository (ApplicationDbContext context)
         {
             _context = context;

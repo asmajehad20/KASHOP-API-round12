@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "KSHOP.PL.Areas.Identity.AccountController",
+    "Method": "Register",
+    "RelativePath": "api/auth/Account/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "KSHOP.DAL.Dtos.Request.RegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "KSHOP.PL.Controllers.CategoriesController",
     "Method": "Index",
     "RelativePath": "api/Categories",
