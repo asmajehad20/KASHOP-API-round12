@@ -1727,7 +1727,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "KSHOP.DAL": "1.0.0"
+          "KSHOP.DAL": "1.0.0",
+          "Mapster": "7.4.0"
         },
         "compile": {
           "bin/placeholder/KSHOP.BLL.dll": {}
@@ -5226,7 +5227,6 @@
   "projectFileDependencyGroups": {
     "net9.0": [
       "KSHOP.BLL >= 1.0.0",
-      "Mapster >= 7.4.0",
       "Microsoft.AspNetCore.OpenApi >= 9.0.10",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.9",
       "Swashbuckle.AspNetCore >= 9.0.5"
@@ -5286,10 +5286,6 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
-          "Mapster": {
-            "target": "Package",
-            "version": "[7.4.0, )"
-          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[9.0.10, )"
