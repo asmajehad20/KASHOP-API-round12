@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SVb+qM35quY=",
+  "dgSpecHash": "njPeyz1pA08=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\OneDrive\\Desktop\\backend\\KSHOP\\KSHOP.DAL\\KSHOP.DAL.csproj",
+  "projectFilePath": "C:\\Users\\PC\\OneDrive\\Desktop\\study\\projects\\backend\\KSHOP\\KSHOP.DAL\\KSHOP.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

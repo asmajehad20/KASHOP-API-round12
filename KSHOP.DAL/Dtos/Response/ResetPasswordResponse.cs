@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace KSHOP.DAL.Dtos.Response
 {
-    public class LoginResponse : BaseResponse
+    public class ResetPasswordResponse: BaseResponse
     {
-        public string? AccessToken { get; set; }
     }
 }
