@@ -30,9 +30,9 @@ namespace KSHOP.PL.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Index() 
+        public IActionResult Index([FromQuery] string lang = "en") 
         {
-            var response =  _categoryService.GetAllCategoriesAsync();
+            var response =  _categoryService.GetAllCategoriesAsync("lang");
             return Ok(new {message = _localizer["Success"].Value , response });
         }
 

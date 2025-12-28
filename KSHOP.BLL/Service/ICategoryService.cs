@@ -11,7 +11,7 @@ namespace KSHOP.BLL.Service
 {
     public interface ICategoryService
     {
-        Task<List<CategoryResponse>> GetAllCategoriesAsync();
+        Task<List<CategoryResponse>> GetAllCategoriesAsync(string lang = "en");
         Task<CategoryResponse> CreateCategory(CategoryRequest request);
         Task<BaseResponse> DeleteCategoryAsync(int id);
         Task<BaseResponse> UpdateCategoryAsync(int id, CategoryRequest request);

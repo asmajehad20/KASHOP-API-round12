@@ -1,4 +1,5 @@
 
+using KSHOP.BLL.MapsterConfig;
 using KSHOP.BLL.Service;
 using KSHOP.DAL.Data;
 using KSHOP.DAL.Helpers;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
 using System.Text;
@@ -57,6 +59,8 @@ namespace KSHOP.PL
             //builder.Services.AddSwaggerGen();
             //builder.Services.AddDbContext<ApplicationDbContext>(options =>
             //options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings")["DefaultConnection"]));
+            
+            MapsterConfig.MapsterConfigRegister();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
