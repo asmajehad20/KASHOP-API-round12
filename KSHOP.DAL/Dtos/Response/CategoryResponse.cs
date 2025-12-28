@@ -10,6 +10,7 @@ namespace KSHOP.DAL.Dtos.Response
     public class CategoryResponse
     {
         public int Id { get; set; }
+        public String UserName { get; set; }
         public Status Status { get; set; }
         public List<CategoryTranslationResponse> Translations { get; set; }
     }
