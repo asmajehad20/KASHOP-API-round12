@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System.Security.Claims;
 
 namespace KSHOP.PL.Controllers
 {
@@ -31,13 +32,14 @@ namespace KSHOP.PL.Controllers
         [HttpGet("")]
         public IActionResult Index() 
         {
-            var response =  _categoryService.GetAllCategories();
+            var response =  _categoryService.GetAllCategoriesAsync();
             return Ok(new {message = _localizer["Success"].Value , response });
         }
 
         [HttpPost("")]
         public IActionResult Create(CategoryRequest request)
         {
+            var createdBy = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var response = _categoryService.CreateCategory(request);
             return Ok(new {message = _localizer["Success"].Value });
         }

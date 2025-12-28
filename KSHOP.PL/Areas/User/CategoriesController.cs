@@ -21,9 +21,9 @@ namespace KSHOP.PL.Areas.User
         }
 
         [HttpGet("")]
-        public IActionResult Index() 
+        public async Task<IActionResult> Index() 
         {
-            var response = _category.GetAllCategories();
+            var response =await _category.GetAllCategoriesAsync();
             return Ok(new {message = _localizer["Success"].Value, response });
         }
 

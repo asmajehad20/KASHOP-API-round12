@@ -18,18 +18,141 @@ namespace KSHOP.BLL.Service
         { 
             _categoryRepository = categoryRepository;
         }
-        public CategoryResponse CreateCategory(CategoryRequest request)
+
+        public async Task<CategoryResponse> CreateCategory(CategoryRequest request)
         {
             var category = request.Adapt<Category>();
-            _categoryRepository.Create(category);
+            
+            await _categoryRepository.CreateAsync(category);
             return category.Adapt<CategoryResponse>();
         }
 
-        public List<CategoryResponse> GetAllCategories()
+        public async Task<List<CategoryResponse>> GetAllCategoriesAsync()
         {
-            var categories = _categoryRepository.GetAll();
+            var categories = await _categoryRepository.GetAllAsync();
+
             var response = categories.Adapt<List<CategoryResponse>>();
             return response;
         }
+
+        public async Task<BaseResponse> DeleteCategoryAsync(int id)
+        {
+            try
+            {
+                var category = await _categoryRepository.FindbyIdAsync(id);
+                if (category == null) 
+                {
+                    return new BaseResponse()
+                    {
+                        Success = false,
+                        Message = "category not found"
+                    };
+
+                }
+                await _categoryRepository.DeleteAsync(category);
+                
+                return new BaseResponse()
+                {
+                    Success = true,
+                    Message = "category deleted"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse()
+                {
+                    Success = false,
+                    Message = "cant delete category",
+                    Errors = new List<string> { ex.Message }
+                };
+            }
+        }
+
+        public async Task<BaseResponse> UpdateCategoryAsync(int id, CategoryRequest request)
+        {
+            try
+            {
+                var category = await _categoryRepository.FindbyIdAsync(id);
+                if (category == null)
+                {
+                    return new BaseResponse()
+                    {
+                        Success = false,
+                        Message = "category not found"
+                    };
+
+                }
+                if (request.Translations != null)
+                {
+                    foreach (var translation in request.Translations)
+                    {
+                        var existing = category.Translations.FirstOrDefault(t => t.Language == translation.Language);
+
+                        if (existing is not null)
+                        {
+                            existing.Name = translation.Name;
+                        }
+                        else
+                        {
+                            return new BaseResponse()
+                            {
+                                Success = false,
+                                Message = "translation not supported"
+                                
+                            };
+                        }
+                    }
+                }
+                await _categoryRepository.UpdateAsync(category);
+                return new BaseResponse()
+                {
+                    Success = true,
+                    Message = "category updated successfully"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse()
+                {
+                    Success = false,
+                    Message = "cant update category",
+                    Errors = new List<string> { ex.Message }
+                };
+            }
+        }
+
+        public async Task<BaseResponse> ToggleStatus(int id)
+        {
+            try
+            {
+                var category = await _categoryRepository.FindbyIdAsync(id);
+                if (category == null)
+                {
+                    return new BaseResponse()
+                    {
+                        Success = false,
+                        Message = "category not found"
+                    };
+
+                }
+                category.Status = category.Status == Status.Active ? Status.InActive :Status.Active;
+                await _categoryRepository.UpdateAsync(category);
+                return new BaseResponse()
+                {
+                    Success = false,
+                    Message = "category updated successfully"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse()
+                {
+                    Success = false,
+                    Message = "cant update category",
+                    Errors = new List<string> { ex.Message }
+                };
+            }
+        }
+
     }
 }
