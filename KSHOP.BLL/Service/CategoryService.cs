@@ -27,9 +27,14 @@ namespace KSHOP.BLL.Service
             return category.Adapt<CategoryResponse>();
         }
 
-        public async Task<List<CategoryResponse>> GetAllCategoriesAsync()
+        public async Task<List<CategoryResponse>> GetAllCategoriesAsync(string lang = "en")
         {
             var categories = await _categoryRepository.GetAllAsync();
+
+            foreach(var category in categories)
+            {
+                category.Translations = category.Translations.Where(t => t.Language == lang).ToList();
+            }
 
             var response = categories.Adapt<List<CategoryResponse>>();
             return response;
