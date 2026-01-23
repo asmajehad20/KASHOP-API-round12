@@ -22,6 +22,13 @@ namespace KSHOP.PL.Areas.Admin
             _localizer = localizer;
         }
 
+        [HttpGet("")]
+        public async Task<IActionResult> Index()
+        {
+            var response = await _categoryService.GetAllCategoriesForAdminAsync();
+            return Ok(new { message = _localizer["Success"].Value });
+        }
+
         [HttpPost("")]
         public async Task<IActionResult> Create([FromBody] CategoryRequest request)
         {

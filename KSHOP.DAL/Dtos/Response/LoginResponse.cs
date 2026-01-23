@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KSHOP.DAL.Migrations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,6 @@ namespace KSHOP.DAL.Dtos.Response
     public class LoginResponse : BaseResponse
     {
         public string? AccessToken { get; set; }
+        public string? RefreshToken { get; set; } 
     }
 }

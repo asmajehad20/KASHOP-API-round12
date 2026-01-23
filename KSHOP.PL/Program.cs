@@ -140,6 +140,12 @@ namespace KSHOP.PL
             builder.Services.AddScoped<ISeedData, RoleSeedData>();
             builder.Services.AddScoped<ISeedData, UserSeedData>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
+            
+            builder.Services.AddScoped<IFileService, FileService> ();
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+            builder.Services.AddScoped<ITokenService, TokenService>();
 
             var app = builder.Build();
             app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
@@ -151,7 +157,8 @@ namespace KSHOP.PL
                 app.UseSwaggerUI();
             }
             
-           
+            app.UseStaticFiles();
+
             app.UseHttpsRedirection();
             
             app.UseAuthorization();
