@@ -26,6 +26,19 @@ namespace KSHOP.BLL.Service
             await _categoryRepository.CreateAsync(category);
             return category.Adapt<CategoryResponse>();
         }
+        
+        public async Task<List<CategoryResponse>> GetAllCategoriesForAdminAsync()
+        {
+            var categories = await _categoryRepository.GetAllAsync();
+            var response = categories.Adapt<List<CategoryResponse>>();
+            return response;
+        }
+        public async Task<List<CategoryResponse>> GetAllCategoriesForUserAsync(string lang = "en")
+        {
+            var categories = await _categoryRepository.GetAllAsync();
+            var response = categories.BuildAdapter().AddParameters("lang", lang).AdaptToType<List<CategoryResponse>>();
+            return response;
+        }
 
         public async Task<List<CategoryResponse>> GetAllCategoriesAsync(string lang = "en")
         {

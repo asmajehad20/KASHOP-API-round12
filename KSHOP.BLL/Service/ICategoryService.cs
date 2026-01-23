@@ -16,5 +16,10 @@ namespace KSHOP.BLL.Service
         Task<BaseResponse> DeleteCategoryAsync(int id);
         Task<BaseResponse> UpdateCategoryAsync(int id, CategoryRequest request);
         Task<BaseResponse> ToggleStatus(int id);
+
+        Task<List<CategoryResponse>> GetAllCategoriesForAdminAsync();
+        Task<List<CategoryResponse>> GetAllCategoriesForUserAsync(string lang = "en");
+
+
     }
 }

@@ -4,6 +4,7 @@ using KSHOP.DAL.Models;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -23,13 +24,15 @@ namespace KSHOP.BLL.Service
         private readonly IConfiguration _config;
         private readonly IEmailSender _emailSender;
         private readonly SignInManager<ApplicationUser> _signInManger;
+        private readonly ITokenService _tokenService;
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, IConfiguration config, IEmailSender emailSender, SignInManager<ApplicationUser> signInManger) 
+        public AuthenticationService(UserManager<ApplicationUser> userManager, IConfiguration config, IEmailSender emailSender, SignInManager<ApplicationUser> signInManger, ITokenService tokenService) 
         {
             _userManager = userManager;
             _config = config;
             _emailSender = emailSender;
             _signInManger = signInManger;
+            _tokenService = tokenService;
         }
         public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
         {
@@ -81,12 +84,20 @@ namespace KSHOP.BLL.Service
                         Message = "invalid password"
                     };
                 }
+                var accessToken = await _tokenService.GenerateAccessToken(user);
+                var refreshToken = _tokenService.GenerateRefreshToken();
+
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+
+                await _userManager.UpdateAsync(user);
 
                 return new LoginResponse()
                 {
                     Success = true,
                     Message = "login Success",
-                    AccessToken = await GenerateAccessToken(user)
+                    AccessToken = accessToken,
+                    RefreshToken = refreshToken
                 };
             }
             catch (Exception ex) 
@@ -153,27 +164,27 @@ namespace KSHOP.BLL.Service
             return true;
         }
 
-        private async Task<string> GenerateAccessToken(ApplicationUser user)
-        {
-            var userClaims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
-            };
+        //private async Task<string> GenerateAccessToken(ApplicationUser user)
+        //{
+        //    var userClaims = new List<Claim>()
+        //    {
+        //        new Claim(ClaimTypes.NameIdentifier, user.Id),
+        //        new Claim(ClaimTypes.Name, user.UserName),
+        //        new Claim(ClaimTypes.Email, user.Email),
+        //    };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
+        //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Audience"],
-                claims: userClaims,
-                expires: DateTime.UtcNow.AddMinutes(30),
-                signingCredentials: creds);
+        //    var token = new JwtSecurityToken(
+        //        issuer: _config["Jwt:Issuer"],
+        //        audience: _config["Jwt:Audience"],
+        //        claims: userClaims,
+        //        expires: DateTime.UtcNow.AddMinutes(30),
+        //        signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+        //    return new JwtSecurityTokenHandler().WriteToken(token);
+        //}
 
         public async Task<ForgetPasswordResponse> RequestPasswordReset(ForgetPasswordRequest request)
         {
@@ -251,6 +262,39 @@ namespace KSHOP.BLL.Service
             {
                 Success = true,
                 Message = "password reset successfully"
+            };
+        }
+    
+        public async Task<LoginResponse> RefreshTokenAsync(TokenApiModel request)
+        {
+            string accessToken = request.AccessToken;
+            string refreshToken = request.RefreshToken;
+
+            var principal = _tokenService.GetPrincipalFormExpiredToken(accessToken);
+            var userName = principal.Identity.Name;
+            var user = await _userManager.Users.FirstOrDefaultAsync(u=>u.UserName == userName);
+
+            if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+            {
+                return new LoginResponse()
+                {
+                    Success = false,
+                    Message = "Invalid user"
+                };
+            }
+
+            var newAccessToken = await _tokenService.GenerateAccessToken(user);
+            var newRefreshToken = _tokenService.GenerateRefreshToken();
+            user.RefreshToken = newAccessToken;
+
+            await _userManager.UpdateAsync(user);
+
+            return new LoginResponse()
+            {
+                Success = true,
+                Message = "token refreshed",
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken
             };
         }
     }

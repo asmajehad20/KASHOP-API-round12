@@ -9,5 +9,6 @@ namespace KSHOP.DAL.Models
     public class Category:BaseModel
     {
         public List<CategoryTranslations>? Translations { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

@@ -19,4 +19,9 @@
     <ProjectReference Include="..\KSHOP.BLL\KSHOP.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>
