@@ -11,7 +11,7 @@ namespace KSHOP.PL.Areas.Admin
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize(Roles ="Admin")]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -27,7 +27,7 @@ namespace KSHOP.PL.Areas.Admin
         public async Task<IActionResult> Index()
         {
             var response = await _productService.GetAllProductsForAdminAsync();
-            return Ok(new { message = _localizer["Success"].Value });
+            return Ok(new { message = _localizer["Success"].Value, response });
         }
 
         [HttpPost("")]

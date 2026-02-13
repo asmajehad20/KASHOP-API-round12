@@ -21,10 +21,24 @@ namespace KSHOP.BLL.Service
 
         public async Task<CategoryResponse> CreateCategory(CategoryRequest request)
         {
-            var category = request.Adapt<Category>();
+            try
+            {
+                var category = request.Adapt<Category>();
+
+                await _categoryRepository.CreateAsync(category);
+                return category.Adapt<CategoryResponse>();
+            }
+            catch (Exception ex) 
+            {
+                return new CategoryResponse
+                {
+                    Id = 0,
+                    CreatedByUser = "ERROR",
+                    Status = 0,
+                    Translations = null
+                };
+            }
             
-            await _categoryRepository.CreateAsync(category);
-            return category.Adapt<CategoryResponse>();
         }
         
         public async Task<List<CategoryResponse>> GetAllCategoriesForAdminAsync()

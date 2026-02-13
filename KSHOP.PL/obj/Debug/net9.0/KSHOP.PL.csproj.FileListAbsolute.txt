@@ -551,3 +551,4 @@ C:\Users\PC\OneDrive\Desktop\A\backend\KSHOP\KSHOP.PL\obj\Debug\net9.0\KSHOP.PL.
 C:\Users\PC\OneDrive\Desktop\A\backend\KSHOP\KSHOP.PL\obj\Debug\net9.0\KSHOP.PL.genruntimeconfig.cache
 C:\Users\PC\OneDrive\Desktop\A\backend\KSHOP\KSHOP.PL\obj\Debug\net9.0\ref\KSHOP.PL.dll
 C:\Users\PC\OneDrive\Desktop\A\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\KSHOP.PL.staticwebassets.runtime.json
+C:\Users\PC\OneDrive\Desktop\backend\KSHOP\KSHOP.PL\bin\Debug\net9.0\KSHOP.PL.staticwebassets.runtime.json

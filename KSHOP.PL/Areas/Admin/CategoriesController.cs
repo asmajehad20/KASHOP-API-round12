@@ -26,14 +26,14 @@ namespace KSHOP.PL.Areas.Admin
         public async Task<IActionResult> Index()
         {
             var response = await _categoryService.GetAllCategoriesForAdminAsync();
-            return Ok(new { message = _localizer["Success"].Value });
+            return Ok(new { message = _localizer["Success"].Value, response });
         }
 
         [HttpPost("")]
         public async Task<IActionResult> Create([FromBody] CategoryRequest request)
         {
             var response = await _categoryService.CreateCategory(request);
-            return Ok(new { message = _localizer["Success"].Value });
+            return Ok(new { message = _localizer["Success"].Value , response });
         }
 
         [HttpDelete("{id}")]

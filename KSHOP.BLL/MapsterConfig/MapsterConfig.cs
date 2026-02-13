@@ -15,7 +15,7 @@ namespace KSHOP.BLL.MapsterConfig
         public static void MapsterConfigRegister()
         {
             TypeAdapterConfig<Category, CategoryResponse>.NewConfig()
-                .Map(dest => dest.CreatedByUser, source => source.User.UserName);
+                .Map(dest => dest.CreatedByUser, source => source.CreatedBy);
 
             TypeAdapterConfig<Product, ProductResponse>.NewConfig()
                 .Map(dest=>dest.MainImage, source => $"https://localhost:7082/images/{source.MainImage}");

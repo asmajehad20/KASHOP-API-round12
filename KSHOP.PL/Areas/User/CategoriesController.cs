@@ -7,7 +7,7 @@ using Microsoft.Extensions.Localization;
 
 namespace KSHOP.PL.Areas.User
 {
-    [Route("api/[controller]")]
+    [Route("api/user/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {

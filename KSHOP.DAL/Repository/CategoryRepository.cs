@@ -21,14 +21,23 @@ namespace KSHOP.DAL.Repository
 
         public async Task<Category> CreateAsync(Category request)
         {
-            await _context.AddAsync(request);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.AddAsync(request);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.ToString());
+            }
+            
             return request;
         }
 
         public async Task<List<Category>> GetAllAsync()
         {
             return await _context.Categories.Include(c => c.Translations).Include(c => c.User).ToListAsync();
+           
         }
 
         public async Task<Category?> FindbyIdAsync(int id)

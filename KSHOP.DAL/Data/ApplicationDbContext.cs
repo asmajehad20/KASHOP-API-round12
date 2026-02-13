@@ -51,7 +51,8 @@ namespace KSHOP.DAL.Data
             
             if(_httpContextAccessor.HttpContext != null)
             {
-                var currentId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var currentId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "SYSTEM";
+
                 foreach (var entityEntry in entries)
                 {
                     if (entityEntry.State == EntityState.Added)
@@ -69,6 +70,35 @@ namespace KSHOP.DAL.Data
             
             return base.SaveChanges();
         }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker.Entries<BaseModel>();
+
+
+            if (_httpContextAccessor.HttpContext != null)
+            {
+                var currentId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "SYSTEM";
+
+                foreach (var entityEntry in entries)
+                {
+                    if (entityEntry.State == EntityState.Added)
+                    {
+                        entityEntry.Property(x => x.CreatedBy).CurrentValue = currentId;
+                        entityEntry.Property(x => x.CreatedAt).CurrentValue = DateTime.UtcNow;
+                    }
+                    else if (entityEntry.State == EntityState.Modified)
+                    {
+                        entityEntry.Property(x => x.UpdatedBy).CurrentValue = currentId;
+                        entityEntry.Property(x => x.UpdatedAt).CurrentValue = DateTime.UtcNow;
+                    }
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
+
     }
 
 }

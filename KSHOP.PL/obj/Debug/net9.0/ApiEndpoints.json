@@ -143,7 +143,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
+        "Name": "token",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -151,6 +151,38 @@
         "Name": "userId",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KSHOP.PL.Areas.Identity.AccountController",
+    "Method": "Login",
+    "RelativePath": "api/auth/Account/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "KSHOP.DAL.Dtos.Request.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KSHOP.PL.Areas.Identity.AccountController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/auth/Account/RefreshToken",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "KSHOP.DAL.Dtos.Request.TokenApiModel",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -238,7 +270,7 @@
   {
     "ContainingType": "KSHOP.PL.Areas.User.CategoriesController",
     "Method": "Index",
-    "RelativePath": "api/Categories",
+    "RelativePath": "api/user/Categories",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
