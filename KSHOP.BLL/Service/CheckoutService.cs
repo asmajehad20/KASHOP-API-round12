@@ -63,8 +63,12 @@ namespace KSHOP.BLL.Service
                     PaymentMethodTypes = new List<string> { "card" },
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
-                    SuccessUrl = $"https://localhost:7082/api/checkout/success",
-                    CancelUrl = $"https://localhost:7082/api/checkout/cancel",
+                    SuccessUrl = $"https://localhost:7082/api/checkouts/success?session_id={{CHECKOUT_SESSION_ID}}",
+                    CancelUrl = $"https://localhost:7082/api/checkouts/cancel",
+                    Metadata = new Dictionary<string, string>
+                    {
+                        {"UserId", userId },
+                    },
                 };
 
                 foreach (var item in cartItems)
@@ -78,7 +82,7 @@ namespace KSHOP.BLL.Service
                             {
                                 Name = item.Product.Translations.FirstOrDefault(t => t.Language == "en")?.Name ?? "Product"
                             },
-                            UnitAmount = (long)(item.Product.Price * 100), // convert to cents
+                            UnitAmount = (long)(item.Product.Price * 100), 
                         },
                         Quantity = item.Count,
                     });

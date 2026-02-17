@@ -3,6 +3,7 @@ using KSHOP.DAL.Dtos.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace KSHOP.PL.Areas.User
@@ -29,6 +30,21 @@ namespace KSHOP.PL.Areas.User
                 return BadRequest(response);
             }
             return Ok(response);
+        }
+
+        [HttpGet("Success")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Success([FromQuery] string session_id)
+        {
+            var service = new SessionService();
+            var session = service.Get(session_id);
+            var userId = session.Metadata["UserId"];
+            Console.WriteLine(userId);
+            return Ok(new
+            {
+                Message = "Success",
+                UserId = userId,
+            });
         }
     }
 }
