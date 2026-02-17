@@ -320,6 +320,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "KSHOP.PL.Areas.User.CheckoutsController",
+    "Method": "Success",
+    "RelativePath": "api/Checkouts/Success",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "session_id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "KSHOP.PL.Areas.User.ProductsController",
     "Method": "Index",
     "RelativePath": "api/Products",

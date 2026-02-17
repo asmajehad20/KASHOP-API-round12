@@ -1,6 +1,9 @@
 ﻿using KSHOP.DAL.Dtos.Request;
 using KSHOP.DAL.Dtos.Response;
+using KSHOP.DAL.Models;
 using KSHOP.DAL.Repository;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Stripe;
 using Stripe.Checkout;
 using System;
@@ -14,10 +17,19 @@ namespace KSHOP.BLL.Service
     public class CheckoutService : ICheckoutService
     {
         private readonly ICartRepository _cartRepository;
-
-        public CheckoutService(ICartRepository cartRepository) 
+        private readonly IOrderRepository _orderRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IEmailSender _emailSender;
+        private readonly IOrderItemRepository _orderItemRepository;
+        public CheckoutService(ICartRepository cartRepository, IOrderRepository orderRepository,
+            UserManager<ApplicationUser> userManager, IEmailSender emailSender,
+            IOrderItemRepository orderItemRepository) 
         { 
             _cartRepository = cartRepository;
+            _orderRepository = orderRepository;
+            _userManager = userManager;
+            _emailSender = emailSender;
+            _orderItemRepository = orderItemRepository;
         }
 
         public async Task<CheckoutResponse> ProcessPaymentAsync(CheckoutRequest request, string userId)
@@ -33,6 +45,7 @@ namespace KSHOP.BLL.Service
             }
 
             decimal totalAmount = 0;
+
             foreach(var cart in cartItems)
             {
                 if(cart.Product.Quantity < cart.Count)
@@ -46,7 +59,14 @@ namespace KSHOP.BLL.Service
                 totalAmount += cart.Product.Price * cart.Count;
             }
 
-            if(request.PaymentMethod == "cash") 
+            Order order = new Order
+            {
+                UserId = userId,
+                PaymentMethod = request.PaymentMethod,
+                AmountPaid = totalAmount,
+            };
+
+            if (request.PaymentMethod == PaymentMethodEnum.Cash) 
             {
                 return new CheckoutResponse
                 {
@@ -55,7 +75,7 @@ namespace KSHOP.BLL.Service
                 };
             }
 
-            if(request.PaymentMethod == "visa") 
+            if(request.PaymentMethod == PaymentMethodEnum.Visa) 
             {
                 var options = new SessionCreateOptions
 
@@ -90,6 +110,9 @@ namespace KSHOP.BLL.Service
 
                 var service = new SessionService();
                 var session = service.Create(options);
+                order.SessionId = session.Id;
+
+                await _orderRepository.CreateAsync(order);
 
                 return new CheckoutResponse
                 {
@@ -108,6 +131,46 @@ namespace KSHOP.BLL.Service
                 };
             }
 
+        }
+
+
+        public async Task<CheckoutResponse> HandleSuccessAsync(string sessionId)
+        {
+            var service = new SessionService();
+            var session = service.Get(sessionId);
+            var userId = session.Metadata["UserId"];
+            //Console.WriteLine(userId);
+
+            var order = await _orderRepository.GetBySessionIdAsync(sessionId);
+            order.PaymentId = session.PaymentIntentId;
+            order.OrderStatus = OrderStatusEnum.Approved;
+            await _orderRepository.UpdateAsync(order);
+
+            var user = await _userManager.FindByEmailAsync(userId);
+            
+            var carItems = await _cartRepository.GetUserCartAsync(userId);
+            
+            var orderItems = new List<OrderItem>();
+            foreach(var cartItem in carItems)
+            {
+                var orderItem = new OrderItem
+                {
+                    OrderId = order.Id,
+                    ProductId = cartItem.ProductId,
+                    UnitPrice = cartItem.Product.Price,
+                    Quantity = cartItem.Count,
+                    TotalPrice = cartItem.Product.Price * cartItem.Count,
+                };
+                orderItems.Add(orderItem);
+            }
+            await _orderItemRepository.CreateAsync(orderItems);
+            await _cartRepository.ClearCartAsync(userId);
+            await _emailSender.SendEmailAsync(user.Email, "payment successfuly", "<h2>thank you ...</h2>");
+            return new CheckoutResponse
+            {
+                Success = true,
+                Message = "payment completed successfully",
+            };
         }
     }
 }

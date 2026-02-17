@@ -158,7 +158,9 @@ namespace KSHOP.PL
 
             builder.Services.AddScoped<ITokenService, BLL.Service.TokenService>();
             builder.Services.AddScoped<ICheckoutService, BLL.Service.CheckoutService>();
-
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            
 
             var app = builder.Build();
             app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
