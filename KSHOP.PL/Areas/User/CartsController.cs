@@ -39,5 +39,13 @@ namespace KSHOP.PL.Areas.User
             var result = await _cartService.GetUserCartAsync(userId);
             return Ok(result);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> ClearCart()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await _cartService.ClearCartAsync(userId);
+            return Ok(result);
+        }
     }
 }

@@ -1,4 +1,5 @@
 
+using KSHOP.BLL;
 using KSHOP.BLL.MapsterConfig;
 using KSHOP.BLL.Service;
 using KSHOP.DAL.Data;
@@ -13,10 +14,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
+
 using System.Globalization;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Stripe;
 
 namespace KSHOP.PL
 {
@@ -62,6 +65,9 @@ namespace KSHOP.PL
             //options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings")["DefaultConnection"]));
             
             MapsterConfig.MapsterConfigRegister();
+
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+            StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -135,7 +141,7 @@ namespace KSHOP.PL
                     });
                 });
 
-
+            
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -144,13 +150,15 @@ namespace KSHOP.PL
             builder.Services.AddScoped<ISeedData, UserSeedData>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
             
-            builder.Services.AddScoped<IFileService, FileService> ();
-            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IFileService, BLL.Service.FileService> ();
+            builder.Services.AddScoped<IProductService, BLL.Service.ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICartRepository, CartRepository>();
 
-            builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddScoped<ITokenService, BLL.Service.TokenService>();
+            builder.Services.AddScoped<ICheckoutService, BLL.Service.CheckoutService>();
+
 
             var app = builder.Build();
             app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);

@@ -13,5 +13,6 @@ namespace KSHOP.DAL.Repository
         Task<List<Cart>> GetUserCartAsync(string userId);
         Task<Cart> GetCartItemsAsync(string userId, int productId);
         Task<Cart> UpdateAsync(Cart cart);
+        Task ClearCartAsync(string userId);
     }
 }
