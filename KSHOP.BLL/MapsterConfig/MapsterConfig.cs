@@ -33,6 +33,8 @@ namespace KSHOP.BLL.MapsterConfig
                 .Map(dest => dest.Name, source => source.Translations
                 .Where(t => t.Language == MapContext.Current.Parameters["lang"].ToString())
                 .Select(t=>t.Name).FirstOrDefault());
+
+            
         }
     }
 }

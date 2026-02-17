@@ -147,6 +147,8 @@ namespace KSHOP.PL
             builder.Services.AddScoped<IFileService, FileService> ();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<ICartService, CartService>();
+            builder.Services.AddScoped<ICartRepository, CartRepository>();
 
             builder.Services.AddScoped<ITokenService, TokenService>();
 
