@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KSHOP.DAL.Dtos.Response
 {
-    public class CheckoutResponse
+    public class CheckoutResponse : BaseResponse
     {
         public string? Url { get; set; }
         public string? PaymentId { get; set; }

@@ -304,6 +304,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "KSHOP.PL.Areas.User.CheckoutsController",
+    "Method": "Payment",
+    "RelativePath": "api/Checkouts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "KSHOP.DAL.Dtos.Request.CheckoutRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "KSHOP.PL.Areas.User.ProductsController",
     "Method": "Index",
     "RelativePath": "api/Products",
