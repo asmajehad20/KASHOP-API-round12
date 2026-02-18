@@ -12,7 +12,7 @@ namespace KSHOP.BLL.Service
     {
         Task<ProductResponse> CreateProduct(ProductRequest request);
         Task<List<ProductResponse>> GetAllProductsForAdminAsync();
-        Task<List<ProductUserResponse>> GetAllProductsForUserAsync(string lang = "en");
+        Task<List<ProductUserResponse>> GetAllProductsForUserAsync(string lang = "en", int page = 1, int limit = 3, string? search = null);
         Task<ProductUserDetails> GetProductDetailsAsync(int id, string lang = "en");
     }
 }

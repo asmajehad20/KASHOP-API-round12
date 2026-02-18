@@ -4,6 +4,8 @@ using KSHOP.DAL.Dtos.Response;
 using KSHOP.DAL.Models;
 using KSHOP.DAL.Repository;
 using Mapster;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,10 +59,20 @@ namespace KSHOP.BLL.Service
             return response;
         }
 
-        public async Task<List<ProductUserResponse>> GetAllProductsForUserAsync(string lang = "en")
+        public async Task<List<ProductUserResponse>> GetAllProductsForUserAsync(string lang = "en", int page = 1, int limit = 3, string? search = null)
         {
-            var categories = await _productRepository.GetAllAsync();
-            var response = categories.BuildAdapter().AddParameters("lang", lang).AdaptToType<List<ProductUserResponse>>();
+            var query = _productRepository.Query();
+
+            if(search is not null)
+            {
+                query = query.Where(p=>p.Translations.Any(t=>t.Language == lang && t.Name.Contains(search) || t.Description.Contains(search)));
+            }
+
+            var totalCount = await query.CountAsync();
+
+            query = query.Skip((page - 1) * limit).Take(limit);
+
+            var response = query.BuildAdapter().AddParameters("lang", lang).AdaptToType<List<ProductUserResponse>>();
             return response;
         }
 

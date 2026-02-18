@@ -21,15 +21,20 @@ namespace KSHOP.BLL.Service
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly IOrderItemRepository _orderItemRepository;
+        private readonly IProductRepository _productRepository;
+
+
         public CheckoutService(ICartRepository cartRepository, IOrderRepository orderRepository,
             UserManager<ApplicationUser> userManager, IEmailSender emailSender,
-            IOrderItemRepository orderItemRepository) 
+            IOrderItemRepository orderItemRepository, IProductRepository productRepository) 
         { 
             _cartRepository = cartRepository;
             _orderRepository = orderRepository;
             _userManager = userManager;
             _emailSender = emailSender;
             _orderItemRepository = orderItemRepository;
+            _productRepository = productRepository;
+        
         }
 
         public async Task<CheckoutResponse> ProcessPaymentAsync(CheckoutRequest request, string userId)
@@ -151,6 +156,9 @@ namespace KSHOP.BLL.Service
             var carItems = await _cartRepository.GetUserCartAsync(userId);
             
             var orderItems = new List<OrderItem>();
+
+            var productUpdated = new List<(int productId, int quantity)>();
+
             foreach(var cartItem in carItems)
             {
                 var orderItem = new OrderItem
@@ -162,10 +170,15 @@ namespace KSHOP.BLL.Service
                     TotalPrice = cartItem.Product.Price * cartItem.Count,
                 };
                 orderItems.Add(orderItem);
+                productUpdated.Add((cartItem.ProductId, cartItem.Count));
+                
             }
+
             await _orderItemRepository.CreateAsync(orderItems);
             await _cartRepository.ClearCartAsync(userId);
+            await _productRepository.DecreaseQuantitesAsync(productUpdated);
             await _emailSender.SendEmailAsync(user.Email, "payment successfuly", "<h2>thank you ...</h2>");
+            
             return new CheckoutResponse
             {
                 Success = true,
