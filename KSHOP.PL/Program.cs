@@ -20,6 +20,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Stripe;
+using KSHOP.PL.Middleware;
 
 namespace KSHOP.PL
 {
@@ -160,7 +161,9 @@ namespace KSHOP.PL
             builder.Services.AddScoped<ICheckoutService, BLL.Service.CheckoutService>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-            
+
+            builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+            builder.Services.AddProblemDetails();
 
             var app = builder.Build();
             app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
@@ -171,7 +174,9 @@ namespace KSHOP.PL
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            
+
+            //app.UseMiddleware<GlobalExceptionHandling>();
+            app.UseExceptionHandler();
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();
@@ -191,6 +196,7 @@ namespace KSHOP.PL
 
             app.MapControllers();
 
+            
             app.Run();
         }
     }

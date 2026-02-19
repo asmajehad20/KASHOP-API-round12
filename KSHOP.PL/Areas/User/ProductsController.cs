@@ -22,9 +22,19 @@ namespace KSHOP.PL.Areas.User
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> Index([FromQuery] string lang = "en", [FromQuery] int page = 1, [FromQuery] int limit = 3, [FromQuery] string? search= null)
+        public async Task<IActionResult> Index(
+            [FromQuery] string lang = "en",
+            [FromQuery] int page = 1, 
+            [FromQuery] int limit = 3,
+            [FromQuery] string? search= null,
+            [FromQuery] int? categoryId = null,
+            [FromQuery] decimal? minPrice = null,
+            [FromQuery] decimal? maxPrice = null,
+            [FromQuery] string? sortBy = null,
+            [FromQuery] bool asc = true
+            )
         {
-            var response = await _productService.GetAllProductsForUserAsync(lang, page, limit, search);
+            var response = await _productService.GetAllProductsForUserAsync(lang, page, limit, search, categoryId, minPrice, maxPrice, sortBy, asc);
             return Ok(new { message = _localizer["Success"].Value, response });
         }
 
