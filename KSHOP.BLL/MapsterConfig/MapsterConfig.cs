@@ -34,7 +34,10 @@ namespace KSHOP.BLL.MapsterConfig
                 .Where(t => t.Language == MapContext.Current.Parameters["lang"].ToString())
                 .Select(t=>t.Name).FirstOrDefault());
 
-            
+            TypeAdapterConfig<Order, OrderResponse>.NewConfig()
+                .Map(dest => dest.UserName, source => source.User.UserName);
+
+
         }
     }
 }

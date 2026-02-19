@@ -12,5 +12,7 @@ namespace KSHOP.DAL.Repository
         Task<Order> CreateAsync(Order request);
         Task<Order> GetBySessionIdAsync(string sessionId);
         Task<Order> UpdateAsync(Order order);
+        Task<List<Order>> GetOrdersByStatusAsync(OrderStatusEnum status);
+        Task<Order?> GetOrderByIdAsync(int orderId);
     }
 }

@@ -79,6 +79,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "KSHOP.PL.Areas.Admin.OrdersController",
+    "Method": "GetOrders",
+    "RelativePath": "api/admin/Orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KSHOP.PL.Areas.Admin.OrdersController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/admin/Orders/{orderId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "KSHOP.DAL.Dtos.Request.UpdateOrderStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "KSHOP.PL.Areas.Admin.ProductsController",
     "Method": "Index",
     "RelativePath": "api/admin/Products",

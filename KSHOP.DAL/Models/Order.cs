@@ -19,6 +19,13 @@ namespace KSHOP.DAL.Models
         Cash = 1,
         Visa = 2,
     }
+    public enum PaymentStatusEnum
+    {
+        UnPaid = 1,
+        Paid = 2,
+
+    }
+
     public class Order
     {
         public int Id { get; set; }
@@ -29,6 +36,8 @@ namespace KSHOP.DAL.Models
         public PaymentMethodEnum PaymentMethod { get; set; }
         public string? SessionId { get; set; }
         public string? PaymentId { get; set; }
+
+        public PaymentStatusEnum? PaymentStatus { get; set; }
 
         public decimal? AmountPaid { get; set; }
 
