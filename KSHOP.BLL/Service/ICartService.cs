@@ -13,5 +13,7 @@ namespace KSHOP.BLL.Service
         Task<BaseResponse> AddToCartAsync(string userId, AddToCartRequest request);
         Task<CartSummaryResponse> GetUserCartAsync(string userId, string lang = "en");
         Task<BaseResponse> ClearCartAsync(string userId);
+        Task<BaseResponse> RemoveFromCartAsync(string userId, int productId);
+        Task<BaseResponse> UpdateQuantityAsync(string userId, int productId, int count);
     }
 }

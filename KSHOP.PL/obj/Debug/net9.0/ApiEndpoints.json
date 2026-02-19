@@ -272,6 +272,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "KSHOP.PL.Areas.User.CartsController",
+    "Method": "UpdateQuantity",
+    "RelativePath": "api/Carts/{producrId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "producrId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "KSHOP.DAL.Dtos.Request.UpdateQuantityRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KSHOP.PL.Areas.User.CartsController",
+    "Method": "DeleteItemFromCart",
+    "RelativePath": "api/Carts/{productId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "KSHOP.PL.Controllers.CategoriesController",
     "Method": "Index",
     "RelativePath": "api/Categories",

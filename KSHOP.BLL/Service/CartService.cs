@@ -33,7 +33,11 @@ namespace KSHOP.BLL.Service
                     Message = "product not found"
                 };
             }
-            if (product.Quantity < request.Count)
+
+            var cartItem = await _cartRepository.GetCartItemsAsync(userId, request.ProductId);
+            var  existingCount = cartItem?.Count ?? 0;
+
+            if (product.Quantity < (existingCount + request.Count))
             {
                 return new BaseResponse
                 {
@@ -42,7 +46,7 @@ namespace KSHOP.BLL.Service
                 };
             }
 
-            var cartItem = await _cartRepository.GetCartItemsAsync(userId, request.ProductId);
+            
             if (cartItem is not null)
             {
                 cartItem.Count += request.Count;
@@ -82,6 +86,49 @@ namespace KSHOP.BLL.Service
             };
         }
 
+        public async Task<BaseResponse> UpdateQuantityAsync(string userId, int productId, int count)
+        {
+            var cartItem = await _cartRepository.GetCartItemsAsync(userId, productId);
+            var product = await _productRepository.FindByIdAsync(productId);
+
+            //if(count <= 0)
+            //{
+            //    return new BaseResponse
+            //    {
+            //        Success = false,
+            //        Message = "invalid count"
+            //    };
+            //}
+
+            if(count == 0)
+            {
+                await _cartRepository.DeleteAsync(cartItem);
+                return new BaseResponse
+                {
+                    Success = true,
+                    Message = "product removed from cart"
+                };
+            }
+
+            if(product.Quantity < count)
+            {
+                return new BaseResponse
+                {
+                    Success = false,
+                    Message = "not enough stock"
+                };
+            }
+
+            cartItem.Count = count;
+            await _cartRepository.UpdateAsync(cartItem);
+
+            return new BaseResponse
+            {
+                Success = true,
+                Message = "Quantity updated successfully"
+            };
+        }
+
         public async Task<BaseResponse> ClearCartAsync(string userId)
         {
             await _cartRepository.ClearCartAsync(userId);
@@ -89,6 +136,26 @@ namespace KSHOP.BLL.Service
             {
                 Success = true,
                 Message = "cart cleared successfully"
+            };
+        }
+
+        public async Task<BaseResponse> RemoveFromCartAsync(string userId, int productId)
+        {
+            var cartItem = await _cartRepository.GetCartItemsAsync(userId, productId);
+            if(cartItem is null)
+            {
+                return new BaseResponse
+                {
+                    Success = false,
+                    Message = "cart item is not found"
+                };
+            }
+
+            await _cartRepository.DeleteAsync(cartItem);
+            return new BaseResponse
+            {
+                Success = true,
+                Message = "item removed successfully"
             };
         }
     }
