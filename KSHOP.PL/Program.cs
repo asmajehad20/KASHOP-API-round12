@@ -29,7 +29,19 @@ namespace KSHOP.PL
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var MyAllowSpecificOrigins = "_myAllowOrigins";
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    policy => 
+                    {
+                        //policy.WithOrigins("");
+                        policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
             
             // Add services to the container.
 
@@ -179,6 +191,7 @@ namespace KSHOP.PL
                 app.UseSwaggerUI();
             }
 
+            app.UseCors(MyAllowSpecificOrigins);
             //app.UseMiddleware<GlobalExceptionHandling>();
             app.UseExceptionHandler();
             app.UseStaticFiles();
