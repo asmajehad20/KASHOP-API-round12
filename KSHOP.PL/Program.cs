@@ -163,6 +163,8 @@ namespace KSHOP.PL
             builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IManageUser, ManageUser>();
+            builder.Services.AddScoped<IReviewService, BLL.Service.ReviewService>();
+            builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
             builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
             builder.Services.AddProblemDetails();

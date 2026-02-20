@@ -4,6 +4,7 @@ using KSHOP.PL.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using System.Security.Claims;
 
 namespace KSHOP.PL.Areas.User
 {
@@ -14,11 +15,13 @@ namespace KSHOP.PL.Areas.User
     {
         private readonly IProductService _productService;
         private readonly IStringLocalizer<SharedResource> _localizer;
+        private readonly IReviewService _reviewService;
 
-        public ProductsController(IProductService productService, IStringLocalizer<SharedResource> localizer)
+        public ProductsController(IProductService productService, IStringLocalizer<SharedResource> localizer, IReviewService reviewService)
         {
             _productService = productService;
             _localizer = localizer;
+            _reviewService = reviewService;
         }
 
         [HttpGet("")]
@@ -45,5 +48,17 @@ namespace KSHOP.PL.Areas.User
             return Ok(new { message = _localizer["Success"].Value, response });
 
         }
+
+        [HttpPost("{productId}/reviews")]
+        public async Task<IActionResult> AddReview([FromRoute] int productId, [FromBody] CreateReviewRequest request)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var response = await _reviewService.AddReviewAsync(userId, productId, request);
+            if (!response.Success)
+            {
+                return BadRequest(new {message = response.Message});
+            }
+            return Ok(new { message = response.Message });
+        }
     }
-    }
+}
