@@ -33,6 +33,8 @@ namespace KSHOP.BLL.Service
             if(request.MainImage != null)
             {
                 var imagePath = await _fileService.UploadAsync(request.MainImage);
+                if (string.IsNullOrEmpty(imagePath))
+                    throw new Exception("Image upload failed and returned null.");
                 product.MainImage = imagePath;
             }
 
