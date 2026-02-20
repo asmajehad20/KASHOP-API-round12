@@ -34,7 +34,7 @@ namespace KSHOP.DAL.Models
         public DateTime? ShippedDate {  get; set; } 
 
         public PaymentMethodEnum PaymentMethod { get; set; }
-        public string? SessionId { get; set; }
+        public string SessionId { get; set; }
         public string? PaymentId { get; set; }
 
         public PaymentStatusEnum? PaymentStatus { get; set; }

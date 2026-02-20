@@ -13,7 +13,7 @@ namespace KSHOP.DAL.Dtos.Request
         public List<ProductTranslationRequest>? Translations { get; set; }
         public decimal Price { get; set; }
 
-        [MinValue]
+        
         public decimal? Discount { get; set; }
         public int Quantity { get; set; }
         

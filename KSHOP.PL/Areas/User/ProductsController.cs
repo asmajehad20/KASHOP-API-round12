@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace KSHOP.PL.Areas.User
 {
-    [Route("api/[controller]")]
+    [Route("api/user/[controller]")]
     [ApiController]
     //[Authorize]
     public class ProductsController : ControllerBase
@@ -44,7 +44,7 @@ namespace KSHOP.PL.Areas.User
         [HttpGet("{id}")]
         public async Task<IActionResult> Index([FromRoute] int id, [FromQuery] string lang = "en")
         {
-            var response = await _productService.GetProductDetailsAsync(id);
+            var response = await _productService.GetProductDetailsAsync(id, lang);
             return Ok(new { message = _localizer["Success"].Value, response });
 
         }

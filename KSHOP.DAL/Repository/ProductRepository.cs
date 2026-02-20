@@ -28,7 +28,7 @@ namespace KSHOP.DAL.Repository
 
         public async Task<List<Product>> GetAllAsync()
         {
-            return await _context.Products.Include(c => c.Translations).Include(c => c.User).ToListAsync();
+            return await _context.Products.Include(c => c.Translations).Include(c => c.User).Include(c => c.SubImages).ToListAsync();
         }
 
         public async Task<Product?> FindByIdAsync(int id)
@@ -36,7 +36,6 @@ namespace KSHOP.DAL.Repository
             return await _context.Products.Include(c => c.Translations)
                 .Include(c=>c.SubImages)
                 .Include(c=>c.Reviews)
-                .ThenInclude(r=>r.UserName)
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 

@@ -468,9 +468,19 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "KSHOP.PL.Areas.User.CategoriesController",
+    "Method": "Index",
+    "RelativePath": "api/user/Categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "KSHOP.PL.Areas.User.ProductsController",
     "Method": "Index",
-    "RelativePath": "api/Products",
+    "RelativePath": "api/user/Products",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -526,7 +536,7 @@
   {
     "ContainingType": "KSHOP.PL.Areas.User.ProductsController",
     "Method": "Index",
-    "RelativePath": "api/Products/{id}",
+    "RelativePath": "api/user/Products/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -547,7 +557,7 @@
   {
     "ContainingType": "KSHOP.PL.Areas.User.ProductsController",
     "Method": "AddReview",
-    "RelativePath": "api/Products/{productId}/reviews",
+    "RelativePath": "api/user/Products/{productId}/reviews",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -563,16 +573,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "KSHOP.PL.Areas.User.CategoriesController",
-    "Method": "Index",
-    "RelativePath": "api/user/Categories",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {

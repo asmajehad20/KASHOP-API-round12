@@ -11,10 +11,13 @@ namespace KSHOP.PL.Areas.Identity
     public class AccountController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
+
         public AccountController(IAuthenticationService authenticationService) 
         {
             _authenticationService = authenticationService;
         }
+
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
@@ -25,6 +28,8 @@ namespace KSHOP.PL.Areas.Identity
 
             return Ok(result);
         }
+
+
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterRequest request)
         {

@@ -10,7 +10,7 @@ namespace KSHOP.PL.Areas.Admin
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;

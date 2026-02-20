@@ -89,7 +89,7 @@ namespace KSHOP.BLL.Service
                     PaymentMethodTypes = new List<string> { "card" },
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
-                    SuccessUrl = $"https://localhost:7082/api/checkouts/success?session_id={{CHECKOUT_SESSION_ID}}",
+                    SuccessUrl = $"https://localhost:7082/api/checkouts/Success?session_id={{CHECKOUT_SESSION_ID}}",
                     CancelUrl = $"https://localhost:7082/api/checkouts/cancel",
                     Metadata = new Dictionary<string, string>
                     {
@@ -118,6 +118,7 @@ namespace KSHOP.BLL.Service
                 var session = service.Create(options);
                 order.SessionId = session.Id;
                 order.PaymentStatus = PaymentStatusEnum.Paid;
+                
 
                 await _orderRepository.CreateAsync(order);
 

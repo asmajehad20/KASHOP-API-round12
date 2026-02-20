@@ -1,5 +1,6 @@
 ﻿using KSHOP.BLL.Service;
 using KSHOP.DAL.Dtos.Request;
+using KSHOP.DAL.Dtos.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,11 +35,11 @@ namespace KSHOP.PL.Areas.User
 
         [HttpGet("Success")]
         [AllowAnonymous]
-        public async Task<IActionResult> Success([FromQuery] string session_id)
+        public async Task<IActionResult> Success([FromQuery] string? session_id)
         {
+            
             var response = await _checkoutService.HandleSuccessAsync(session_id);
             
-
             if (!response.Success)
             {
                 return BadRequest(response);
